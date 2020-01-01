@@ -45,7 +45,7 @@ namespace LabWork3_Final
             // Вариант 11
             // Найти: Повторяющиеся элементы массива А, которые есть в массиве B
 
-            int n = 100; //Задаём размерность массивов А и B
+            int n = 1000; //Задаём размерность массивов А и B
 
             int[] massiveA = new int[n];
             int[] massiveB = new int[n];
@@ -102,15 +102,27 @@ namespace LabWork3_Final
                     Temp = massiveA[i];
                     for (int k = 0; k < massiveB.Length; k++)
                     {
-                        Array.Resize(ref massiveC, massiveC.Length + 1);
-                        massiveC[Counter] = Temp;
-                        Counter++;
-                        break;
+                        if (massiveB[k] == Temp)
+                        {
+                            Array.Resize(ref massiveC, massiveC.Length + 1);
+                            massiveC[Counter] = Temp;
+                            Counter++;
+                            break;
+                        }
                     }
                 }
             }
-            ShowArray(massiveC, "\n Результат выполнения задания: ");
-            Console.ReadKey();
+            if (massiveC.Length == 0)
+            {
+                Console.WriteLine("Элементов, отвечающих условию задания нет.");
+            }
+            else
+                { ShowArray(massiveC, "Элементы, повторяющиеся в массиве A и встречющиеся в массиве B:"); }
+
+
+         Console.WriteLine("");
+         Console.WriteLine("Для выхода из программы нажмите любую клавишу");
+         Console.ReadKey();
 
 
         }
