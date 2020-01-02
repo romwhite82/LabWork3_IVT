@@ -13,13 +13,20 @@ namespace LabWork3_Final
         //в форматированном виде
         static void ShowArray(int[] massive, string message)
         {
-            Console.WriteLine(message);
-            for (int i = 0; i < massive.Length; i++)
+            if (massive.Length <= 500)
             {
-                if (i > 0 && i % 10 == 0) Console.Write("\n");
-                Console.Write("|" + massive[i] + "|\t");
+                Console.WriteLine(message);
+                for (int i = 0; i < massive.Length; i++)
+                {
+                    if (i > 0 && i % 10 == 0) Console.Write("\n");
+                    Console.Write("|" + massive[i] + "|\t");
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine();
+            else
+            {
+                Console.WriteLine("\nПрограмма выполняется. Массивы слишком велики для вывода на экран!");
+            }
         }
 
         static int[] BubbleSort(int[] massive)
@@ -48,14 +55,29 @@ namespace LabWork3_Final
             //Размерность массивов определяется аргументом коммандной строки
             // Если аргумент не задан (равен нулю), по умолчанию 100
 
+            Console.WriteLine("Лабораторная работа 3 по теме \"Обработка одномерных массивов\"");
+            Console.WriteLine("по предмету \"Программирование на языках высокого уровня\"");
+            Console.WriteLine("Создаются два массива заданной размерности (по умолчанию 100)");
+            Console.WriteLine("Массивы сортируются Пузырьком. Далее происходит поиск элементов");
+            Console.WriteLine("которые повторяются в первом массиве и встречаются во втором");
+            Console.WriteLine("Значения, отвечающие данным условиям, записываются в третий массив.");
+            Console.WriteLine("\nВыполнил студент: Карандашёв Роман\n");
+            Console.WriteLine("Использование программы: LabWork3.exe [размер массива]\n");
+
+
             int n;
-            if (args.Length==0)
+            if (args.Length == 0)
             { n = 100; }
             else
             {
-                n = Int32.Parse(args[0]);
+                try
+                { n = Int32.Parse(args[0]); }
+                catch { Console.WriteLine("Неправильный аргумент!");
+                Environment.Exit(1);
+                }
+                finally { n = Int32.Parse(args[0]); }
+                                
             }
-
             Console.WriteLine("Размерность массивов A и B: {0}", n);
 
             int[] massiveA = new int[n];
@@ -87,9 +109,10 @@ namespace LabWork3_Final
             //Выводим массив B на экран с использованием метода ShowArray
             ShowArray(massiveB, "\nМассив B до сортировки");
 
+            int t1 = Environment.TickCount; //Засекаем время выполнения программы
+            
             //Теперь для поиска повторяющихся элементов в массиве A, его нужно сортировать Пузырьком
             //Для этого используем метод BubbleSort
-
             massiveA = BubbleSort(massiveA);
             // Выведем его на экран с помощью метода ShowArray
 
@@ -123,15 +146,21 @@ namespace LabWork3_Final
                     }
                 }
             }
+
+            int t2 = Environment.TickCount;//Отсановка замера времени. Сохраняем состояние
+            int TotalTime = t2 - t1;
+           
             if (massiveC.Length == 0)
             {
-                Console.WriteLine("Элементов, отвечающих условию задания нет.");
+                Console.WriteLine("\nЭлементов, отвечающих условию задания нет.");
             }
             else
-                { ShowArray(massiveC, "Элементы, повторяющиеся в массиве A и встречющиеся в массиве B:"); }
+                { ShowArray(massiveC, "\nЭлементы, повторяющиеся в массиве A и встречющиеся в массиве B:"); }
 
-
-         Console.WriteLine("");
+        if (TotalTime < 1000) { Console.WriteLine("\nВремя выполнения программы: {0} мсек", TotalTime); }
+        else { Console.WriteLine("\nВремя выполнения программы: {0} сек", TotalTime / 1000); }
+            
+        Console.WriteLine("");
          Console.WriteLine("Для выхода из программы нажмите любую клавишу");
          Console.ReadKey();
 
