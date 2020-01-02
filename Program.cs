@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LabWork3_Final
 {
@@ -13,13 +9,13 @@ namespace LabWork3_Final
         //в форматированном виде
         static void ShowArray(int[] massive, string message)
         {
-            if (massive.Length <= 500)
+            if (massive.Length <= 500) //Если размер массива меньше 500 элементов, его содержимое выводится на экран
             {
                 Console.WriteLine(message);
                 for (int i = 0; i < massive.Length; i++)
                 {
-                    if (i > 0 && i % 10 == 0) Console.Write("\n");
-                    Console.Write("|" + massive[i] + "|\t");
+                    if (i > 0 && i % 10 == 0) Console.Write("\n"); //после вывода десяти элементов массива - перенос на новую строку
+                    Console.Write("|" + massive[i] + "|\t"); //Добавляем разделители и табуляцию, чтобы красиво выглядело
                 }
                 Console.WriteLine();
             }
@@ -38,7 +34,7 @@ namespace LabWork3_Final
                     if (massive[i] > massive[i + 1]) // Последовательно сравниваем элементы 
                     {                                                  // Больший элемент постепенно движется к концу массива
                         int Temp;   //Временная переменная для обмена большего элемента с меньшим 
-                        Temp = massive[i + 1];
+                        Temp = massive[i + 1]; //Больший элемент движется к концу массива
                         massive[i + 1] = massive[i];
                         massive[i] = Temp;
                     }
@@ -54,6 +50,8 @@ namespace LabWork3_Final
 
             //Размерность массивов определяется аргументом коммандной строки
             // Если аргумент не задан (равен нулю), по умолчанию 100
+            
+            //Описание программы:
 
             Console.WriteLine("Лабораторная работа 3 по теме \"Обработка одномерных массивов\"");
             Console.WriteLine("по предмету \"Программирование на языках высокого уровня\"");
@@ -65,14 +63,14 @@ namespace LabWork3_Final
             Console.WriteLine("Использование программы: LabWork3.exe [размер массива]\n");
 
 
-            int n;
-            if (args.Length == 0)
-            { n = 100; }
+            int n; //размерность массива
+            if (args.Length == 0) //размерность определяется первым аргументом коммандной строки
+            { n = 100; }          //если аргументов нет, размерность по умолчанию равен 100  
             else
             {
                 try
-                { n = Int32.Parse(args[0]); }
-                catch { Console.WriteLine("Неправильный аргумент!");
+                { n = Int32.Parse(args[0]); } //Обработка исключения. Если первый аргумент командной строки не int
+                catch { Console.WriteLine("Неправильный аргумент!"); //Происходит выход из программы с ошибкой
                 Environment.Exit(1);
                 }
                 finally { n = Int32.Parse(args[0]); }
@@ -129,20 +127,20 @@ namespace LabWork3_Final
             int Temp = 0; //Для хранения значения повторяющегося элемента
             int Counter = 0; //Для определения позиции, куда записать значение в итоговом массиве C
 
-            for (int i = 0; i < massiveA.Length - 1; i++)
+            for (int i = 0; i < massiveA.Length - 1; i++) //для поиска повторяющихся элементов, последовательно обходим все элементы
             {
-                if (massiveA[i] == massiveA[i + 1] && massiveA[i] != Temp)
-                {
-                    Temp = massiveA[i];
-                    for (int k = 0; k < massiveB.Length; k++)
-                    {
+                if (massiveA[i] == massiveA[i + 1] && massiveA[i] != Temp) //если следующий элемент равен предыдущему 
+                {                                                          //Записываем его в переменную Temp 
+                    Temp = massiveA[i];                                    //Поскольку элементы могут повторяться более одного раза
+                    for (int k = 0; k < massiveB.Length; k++)              //Проверяем, не записывалось ли значение в переменную ранее
+                    {                                                      //Для каждого повторяющегося элемента проверяем его наличие во втором массиве
                         if (massiveB[k] == Temp)
                         {
-                            Array.Resize(ref massiveC, massiveC.Length + 1);
-                            massiveC[Counter] = Temp;
-                            Counter++;
-                            break;
-                        }
+                            Array.Resize(ref massiveC, massiveC.Length + 1);//Если совпадение найдено, увеличиваем размер массива C на единицу
+                            massiveC[Counter] = Temp; //Записываем значение в массив С
+                            Counter++;  //Увеличиваем счётчик на единицу
+                            break;      //Поскольку нам надо записать только одно значение, выходит из цикла поиска
+                        }               //совпадений
                     }
                 }
             }
@@ -157,12 +155,13 @@ namespace LabWork3_Final
             else
                 { ShowArray(massiveC, "\nЭлементы, повторяющиеся в массиве A и встречющиеся в массиве B:"); }
 
+        //Если время выполнения программы меньше 1000 мсек, выводим значение в миллисекундах, если больше - в секундах
         if (TotalTime < 1000) { Console.WriteLine("\nВремя выполнения программы: {0} мсек", TotalTime); }
         else { Console.WriteLine("\nВремя выполнения программы: {0} сек", TotalTime / 1000); }
             
         Console.WriteLine("");
-         Console.WriteLine("Для выхода из программы нажмите любую клавишу");
-         Console.ReadKey();
+        Console.WriteLine("Для выхода из программы нажмите любую клавишу");
+        Console.ReadKey();
 
 
         }
