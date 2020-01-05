@@ -143,10 +143,8 @@ namespace LabWork3_Final
                 { n = Int32.Parse(args[0]);
                     
                 } 
-                
-                catch { Console.WriteLine("Неправильный аргумент!");
-                    //Происходит выход из программы с ошибкой
-                    Environment.Exit(1);
+                catch { Console.WriteLine("Неправильный аргумент!"); //Происходит выход из программы с ошибкой
+                Environment.Exit(1);
                 }
                 finally { n = Int32.Parse(args[0]); MaxValue = 16384; }
             }
@@ -177,7 +175,7 @@ namespace LabWork3_Final
             // Придётся каким-то образом превратить этот массив
             // в динамический))
 
-            int[] massiveC;
+            int[] massiveC = new int[0];
 
             //Передаём методу значения массивов по ссылке
             //Чтобы преобразования происходили с областью памяти
