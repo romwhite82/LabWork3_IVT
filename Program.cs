@@ -50,18 +50,18 @@ namespace LabWork3_Final
         {
             for (int k = 0; k < massive.Length; k++)
             {
-                for (int i = 0; i < massive.Length - 1; i++)
+                for (int i = 1; i < massive.Length - k; i++)
                 {
                     // Последовательно сравниваем элементы 
                     // Больший элемент постепенно движется к концу массива
 
-                    if (massive[i] > massive[i + 1]) 
+                    if (massive[i-1] > massive[i]) 
                     {
                         //Временная переменная для обмена большего элемента с меньшим 
                         int Temp;   
-                        Temp = massive[i + 1]; 
-                        massive[i + 1] = massive[i];
-                        massive[i] = Temp;
+                        Temp = massive[i]; 
+                        massive[i] = massive[i-1];
+                        massive[i-1] = Temp;
                     }
                 }
             }
