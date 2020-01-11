@@ -163,6 +163,12 @@ namespace LabWork3_Final
                 finally  { n = Int32.Parse(args[0]); MaxValue = Int32.Parse(args[1]); }
             }
 
+            if (args.Length>2) 
+                {
+                    Console.WriteLine ("Слишком много аргументов!");
+                    Environment.Exit(1);
+                }
+
             Console.WriteLine("Размерность массивов A и B: {0}", n);
             Console.WriteLine("Максимальное значение элемента массивов: {0}\n", MaxValue);
 
@@ -219,11 +225,12 @@ namespace LabWork3_Final
 
             if (TotalTime < 10000) 
             { Console.WriteLine("\nВремя выполнения программы: {0} мсек", TotalTime); }
-        else 
+            else 
             { Console.WriteLine("\nВремя выполнения программы: {0} сек", TotalTime / 1000); }
             
         Console.WriteLine("");
         Console.WriteLine("Для выхода из программы нажмите любую клавишу");
+        
         Console.ReadKey();
 
         }
