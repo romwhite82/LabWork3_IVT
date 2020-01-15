@@ -23,10 +23,7 @@ namespace LabWork3_Final
                 }
                 Console.WriteLine();
             }
-            else
-            {
-                Console.WriteLine("\nПрограмма выполняется. Массивы слишком велики для вывода на экран!");
-            }
+
         }
 
         //Метод заполнения двух массивов случайными числами
@@ -34,13 +31,12 @@ namespace LabWork3_Final
         static void Randomize (ref int[] massiveA, ref int[] massiveB, int MaxValue)
         {
             Random rnd = new Random();
-            for (int i = 0; i < massiveA.Length; i++) massiveA[i] = rnd.Next(0, MaxValue);
+            for (int i = 0; i < massiveA.Length; i++)
+            {
+                massiveA[i] = rnd.Next(0, MaxValue);
+                massiveB[i] = rnd.Next(0, MaxValue);
+            }
             
-            //Ждём 500мсек, чтобы при заполнении второго массива 
-            //изменилось системное время. Иначе значения массивов будут одинаковыми
-            
-            Thread.Sleep(500); 
-            for (int i = 0; i < massiveB.Length; i++) massiveB[i] = rnd.Next(0, MaxValue);
         }
 
         //Метод сортировки массива пузырьком
